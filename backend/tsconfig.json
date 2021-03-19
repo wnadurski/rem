@@ -1,0 +1,15 @@
+{
+  "extends": "../shared/tsconfig.json",
+  "compilerOptions": {
+    "incremental": true,
+    "target": "es6",
+    "module": "commonjs",
+    "lib": [
+      "es2015"
+    ],
+    "outDir": "./build",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
