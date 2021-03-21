@@ -4,10 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint:frontend": "cd frontend && npm run lint",
     "lint:backend": "cd backend && npm run lint",
-    "lint": "npm run lint:frontend && npm run lint:backend"
+    "lint": "npm run lint:frontend && npm run lint:backend",
+    "ci:frontend": "cd frontend && npm ci",
+    "ci:backend": "cd backend && npm ci",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "buld": "npm run build:frontend && npm run build:backend",
+    "test:frontend": "cd frontend && npm test -- --watchAll=false",
+    "test:backend": "cd backend && npm test",
+    "test": "npm run test:frontend && npm run test:backend"
   },
   "repository": {
     "type": "git",
