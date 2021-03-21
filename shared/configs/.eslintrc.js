@@ -22,6 +22,8 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "no-console": 2,
     "linebreak-style": "off",
     "prettier/prettier": [
