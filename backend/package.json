@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc -w & nodemon build/index.js"
+    "start": "tsc -w & nodemon build/index.js",
+    "lint": "tsc --noEmit && eslint src/**/*.ts"
   },
   "author": "",
   "license": "ISC",
