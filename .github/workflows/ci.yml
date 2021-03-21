@@ -1,0 +1,39 @@
+name: Rem CI
+
+# Run this workflow every time a new commit pushed to your repository
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
+  ci-check:
+    # Name the Job
+    name: Check the codebase
+    # Set the type of machine to run on
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 15.x ]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Runs the Super-Linter action
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm ci && npm run ci:frontend && npm run ci:backend
+      - run: npm run lint
+      - run: npm run build
+      - run: npm test
