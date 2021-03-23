@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, ReactElement } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MyForm from './MyForm'
@@ -14,7 +14,7 @@ import { render } from '@testing-library/react';
   )
 }*/
 
-function App() {
+function App(): ReactElement {
   return (
     <div className="App">
       <header className="App-header">
@@ -22,7 +22,7 @@ function App() {
 
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
