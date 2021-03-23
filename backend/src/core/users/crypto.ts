@@ -1,6 +1,6 @@
 import * as crypto from "crypto"
-import { Values } from "../../../shared/src/utils/types"
-import { config } from "../config"
+import { Values } from "../../../../shared/src/utils/types"
+import { config } from "../../config"
 import { iso, Newtype } from "newtype-ts"
 
 const algorithms = ["sha256"] as const
