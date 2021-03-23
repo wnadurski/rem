@@ -1,7 +1,6 @@
 import { createUser } from "../User"
 import { v4 } from "uuid"
 import { passwordToStore } from "../crypto"
-import { wrap } from "../../utils/Newtype"
 
 jest.mock("uuid")
 jest.mock("../crypto")
@@ -17,9 +16,7 @@ it("should create new user", () => {
   const user = createUser(email)
 
   expect(user).toEqual({
-    id: {
-      _value: "FAKE UUID",
-    },
+    id: "FAKE UUID",
     email,
     password: undefined,
   })
@@ -27,18 +24,14 @@ it("should create new user", () => {
 
 it("should hash user's password", () => {
   const somePassword = "some password"
-  passwordToStoreMock.mockReturnValue(wrap("something hashed"))
+  passwordToStoreMock.mockReturnValue("something hashed")
 
   const user = createUser(email, somePassword)
 
   expect(passwordToStore).toBeCalledWith(somePassword)
   expect(user).toEqual({
-    id: {
-      _value: "FAKE UUID",
-    },
+    id: "FAKE UUID",
     email,
-    password: {
-      _value: "something hashed",
-    },
+    password: "something hashed",
   })
 })

@@ -1,19 +1,22 @@
 import * as crypto from "crypto"
 import { Values } from "../../../shared/src/utils/types"
 import { config } from "../config"
-import { Newtype, unwrap, wrap } from "../utils/Newtype"
+import { iso, Newtype } from "newtype-ts"
 
 const algorithms = ["sha256"] as const
 
 const hashingAlgorithm = "sha256"
 
-export interface Password extends Newtype<string> {}
+export interface Password
+  extends Newtype<{ readonly Password: unique symbol }, string> {}
 
-const mkPassword = (x: string): Password => wrap(x)
+const isoPassword = iso<Password>()
+
+const mkPassword = (x: string): Password => isoPassword.wrap(x)
 const parsePassword = (
   password: Password
 ): [Values<typeof algorithms>, string, string] => {
-  return unwrap(password).split("$") as any
+  return isoPassword.unwrap(password).split("$") as any
 }
 
 const hashPassword = (
