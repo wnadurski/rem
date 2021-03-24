@@ -1,22 +1,12 @@
 import React, { ReactElement } from "react"
 import "./App.css"
-import MyForm from "./LoginForm"
-
-/*const App = () => {
-  return(
-    <div id ="root">
-      <h1>Something</h1>
-      <MyForm />
-
-    </div>
-  )
-}*/
+import LoginForm from "./LoginForm"
 
 function App(): ReactElement {
   return (
     <div className="App">
       <header className="App-header">
-        <MyForm />
+        <LoginForm />
       </header>
     </div>
   )
