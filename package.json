@@ -10,6 +10,7 @@
     "lint": "npm run lint:frontend && npm run lint:backend && npm run lint:shared",
     "ci:frontend": "cd frontend && npm ci",
     "ci:backend": "cd backend && npm ci",
+    "ci:shared": "cd shared && npm ci",
     "build:frontend": "cd frontend && npm run build",
     "build:backend": "cd backend && npm run build",
     "build": "npm run build:frontend && npm run build:backend",
