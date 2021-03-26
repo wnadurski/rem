@@ -3,13 +3,21 @@
   "compilerOptions": {
     "incremental": true,
     "target": "es6",
-    "module": "commonjs",
+    "module": "esnext",
     "lib": [
       "es2015"
     ],
     "outDir": "./build",
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react"
+  },
+  "include": [
+    "src"
+  ]
 }
