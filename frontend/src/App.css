@@ -36,3 +36,39 @@
     transform: rotate(360deg);
   }
 }
+
+.field {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-column {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.remember-me {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.text-input {
+  padding: 5px;
+  margin-bottom: 5px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 1px solid gray;
+}
+
+.text-input:focus {
+  outline: 0;
+}
+
+.submit-button {
+  margin-top: 5px;
+  width: 75px;
+  align-self: center;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
