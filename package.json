@@ -6,15 +6,18 @@
   "scripts": {
     "lint:frontend": "cd frontend && npm run lint",
     "lint:backend": "cd backend && npm run lint",
-    "lint": "npm run lint:frontend && npm run lint:backend",
+    "lint:shared": "cd shared && npm run lint",
+    "lint": "npm run lint:frontend && npm run lint:backend && npm run lint:shared",
     "ci:frontend": "cd frontend && npm ci",
     "ci:backend": "cd backend && npm ci",
+    "ci:shared": "cd shared && npm ci",
     "build:frontend": "cd frontend && npm run build",
     "build:backend": "cd backend && npm run build",
     "build": "npm run build:frontend && npm run build:backend",
     "test:frontend": "cd frontend && npm test -- --watchAll=false",
     "test:backend": "cd backend && npm test",
-    "test": "npm run test:frontend && npm run test:backend"
+    "test:shared": "cd shared && npm test",
+    "test": "npm run test:frontend && npm run test:backend && npm run test:shared"
   },
   "repository": {
     "type": "git",
@@ -32,6 +35,7 @@
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "typescript": "^4.2.3"
   }
 }
