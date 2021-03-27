@@ -1,6 +1,7 @@
 import yargs from "yargs"
 import * as readline from "readline"
 import { coreApi } from "./core-api"
+import { log } from "./log"
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -24,10 +25,10 @@ const options = yargs
       const email = await ask("Type user's email:\n> ")
       const password = await ask("Type user's passwrd:\n> ")
 
-      console.log("Creating user...")
+      log("Creating user...")
       await coreApi.user.createUser(email, password)
 
-      console.log("User created.")
+      log("User created.")
 
       rl.close()
       process.exit()

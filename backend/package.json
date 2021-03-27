@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "tsc -w & nodemon build/backend/src/index.js",
+    "start": "nodemon",
     "build": "tsc",
     "lint": "tsc --noEmit && eslint src/**/*.ts"
   },
@@ -14,6 +14,7 @@
   "devDependencies": {
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.21",
+    "@types/jsonwebtoken": "^8.5.1",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/parser": "^4.19.0",
     "jest": "^26.6.3",
@@ -25,7 +26,8 @@
   "dependencies": {
     "@prisma/client": "^2.19.0",
     "express": "^4.17.1",
-    "fp-ts": "^2.9.5",
+    "fp-ts": "^2.10.0-rc.6",
+    "jsonwebtoken": "^8.5.1",
     "monocle-ts": "^2.3.9",
     "newtype-ts": "^0.3.4",
     "uuid": "^8.3.2",
