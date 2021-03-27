@@ -1,6 +1,6 @@
-import { Endpoint } from "./utils"
+import { Endpoint, Schema } from "../ts-schema/schema"
 
-export interface AuthEndpoints {
+export type AuthSchema = Schema<{
   signIn: Endpoint<
     "/auth/login",
     "POST",
@@ -15,4 +15,4 @@ export interface AuthEndpoints {
       403: undefined
     }
   >
-}
+}>

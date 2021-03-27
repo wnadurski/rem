@@ -1,5 +1,5 @@
 import { endpoints } from "./endpoints"
-import { Express, Router } from "express"
+import { Router } from "express"
 
 const toLowerCase = <Str extends string>(str: Str): Lowercase<Str> =>
   str.toLowerCase() as any

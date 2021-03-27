@@ -1,9 +1,10 @@
 import { constant, pipe } from "fp-ts/lib/function"
 import { coreApi } from "../../core-api"
-import { EndpointsHandlers } from "../EndpointsHandlers"
 import { matchW } from "fp-ts/Option"
+import { SchemaToProviders } from "../../../../shared/src/ts-schema/provider"
+import { AuthSchema } from "../../../../shared/src/api-schema/auth-schema"
 
-export const authHandlers: EndpointsHandlers["auth"] = {
+export const authHandlers: SchemaToProviders<AuthSchema> = {
   signIn: {
     path: "/auth/login",
     method: "POST",
