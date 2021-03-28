@@ -1,8 +1,5 @@
 import { AnyEndpoint, SchemaWithPrefix } from "./schema"
-
-type ReturnType<A, Keys extends keyof A = keyof A> = Keys extends any
-  ? { code: Keys; data: A[Keys] }
-  : never
+import { ResponseType } from "./_response-type"
 
 export type EndpointToProvider<
   E extends AnyEndpoint,
@@ -13,7 +10,7 @@ export type EndpointToProvider<
   handler: (
     body: Partial<EV["request"]>,
     request: any
-  ) => Promise<ReturnType<EV["response"]>>
+  ) => Promise<ResponseType<EV["response"]>>
 }
 
 export type SchemaToProviders<

@@ -2,7 +2,7 @@ import { Endpoint, Schema, SchemaWithPrefix } from "../schema"
 
 export type MySchema = Schema<{
   users: Schema<{
-    getUsers: Endpoint<"/users", "GET", any, { 200: { users: any[] } }>
+    getUsers: Endpoint<"/users", "GET", undefined, { 200: { users: any[] } }>
     createUser: Endpoint<
       "/users",
       "POST",
@@ -23,7 +23,7 @@ const schema: MySchema = {
           value: {
             path: "/users",
             method: "GET",
-            request: { name: "asd" },
+            request: undefined,
             response: {
               200: { users: [] },
             },
