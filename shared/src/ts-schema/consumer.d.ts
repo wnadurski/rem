@@ -1,5 +1,4 @@
 import { Endpoint, Schema, SchemaWithPrefix } from "./schema"
-import { MySchema } from "./__tests__/schema.test"
 import { ResponseType } from "./_response-type"
 
 type ConsumerFunction<

@@ -14,7 +14,7 @@ const services: MyConsumer = {
   },
 }
 
-function testing() {
+function dummy() {
   services.users.createUser({ path: "/users", method: "POST" }, { name: "asd" })
   services.users.getUsers({ path: "/users", method: "GET" })
 }

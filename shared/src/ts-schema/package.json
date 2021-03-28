@@ -1,0 +1,12 @@
+{
+  "name": "ts-schema",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "tsd"
+  },
+  "author": "hysterus",
+  "license": "ISC"
+}
