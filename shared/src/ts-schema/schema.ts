@@ -20,6 +20,18 @@ export interface Endpoint<
   }
 }
 
+export interface EndpointR<
+  R extends {
+    path: string
+    method: Method
+    request: any
+    response: Response
+  }
+> {
+  __tag: "Endpoint"
+  value: R
+}
+
 export type AnyEndpoint = Endpoint<any, any, any, any>
 
 export type SchemaWithPrefix<

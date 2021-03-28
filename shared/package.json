@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "lint": "eslint src/**/*.ts"
+    "type-check": "tsc --noEmit",
+    "lint": "npm run type-check && eslint src/**/*.ts"
   },
   "author": "hysterus",
   "license": "ISC",
