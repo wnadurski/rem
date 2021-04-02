@@ -1,8 +1,8 @@
-import React from "react"
 import { render, screen } from "@testing-library/react"
-import LoginForm from "../LoginForm"
+import React from "react"
+import LoginForm from "../auth/LoginForm"
 
-test("renders 4 elements specified in MyForm", () => {
+test("renders 4 elements specified in LoginForm", () => {
   render(<LoginForm />)
 
   const usernameField = screen.getByPlaceholderText("Username")
@@ -15,3 +15,13 @@ test("renders 4 elements specified in MyForm", () => {
   expect(submitButton).toBeInTheDocument()
   expect(rememberMeText).toBeInTheDocument()
 })
+
+//test("displays logged in user and token when they log in succesfully", () => {
+
+//expect("Hi".toBeInTheDocument())
+//})
+
+//test("displays error message when login fails", () => {
+
+//expect("error").toBeInTheDocument()
+//})
