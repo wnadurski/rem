@@ -3,9 +3,12 @@ import "./App.css"
 import LoginForm from "./auth/LoginForm"
 import HiUserToken from "./auth/HiUserToken"
 import { getCurrentUser } from "./auth/services"
+import { User } from "./User"
 
 function App(): ReactElement {
-  if (getCurrentUser()) {
+  const [user, setUser] = useState<User | undefined>(undefined)
+
+  if (user) {
     return (
       <div className="App">
         <header className="App-header">
@@ -17,7 +20,7 @@ function App(): ReactElement {
     return (
       <div className="App">
         <header className="App-header">
-          <LoginForm />
+          <LoginForm loginAsUser={setUser} />
         </header>
       </div>
     )

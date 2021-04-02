@@ -3,41 +3,42 @@ import React, { ReactElement, useState } from "react"
 import { getCurrentUser, loginAttempt } from "./services"
 //import { userIsFound } from "./userIsFound"
 import App from "../App"
+import { User } from "../User"
 
-const LoginForm = (): ReactElement => {
+type Props = {
+  loginAsUser: (user: User) => void
+}
+
+const LoginForm = ({ loginAsUser }: Props): ReactElement => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [isLoggedIn, setLoggedIn] = useState(false)
-  const [user, setUser] = useState("")
-  const [token, setToken] = useState("")
-  const [error, setError] = useState("")
+  const [error, setError] = useState<undefined | string>(undefined)
 
-  if (isLoggedIn) {
-    getCurrentUser().then(({ user, token }: { user: any; token: any }) => {
-      setUser(user)
-      setToken(token)
-    })
-  }
   return (
     <div>
       <form
         className="flex-column"
         onSubmit={(e) => {
           e.preventDefault()
-          // wrzucilbym tego ifa do jednej funkcji asynchronicznej w services (bo trzeba sfetchowac chyba czy logowanie sie udalo)
-          //if (userIsFound() && passwordIsCorrect()) {
-          loginAttempt(username, password).then(
-            ({ user, token }: { user: any; token: any }) => {
-              setUser(user)
-              setToken(token)
-            }
-          )
-          //.catch((error) => setError(error)) // moge tak zrobic? czy sparsowac to na stringa?
-          setLoggedIn(true)
-          window.localStorage.setItem("token", token)
-          //to tez byloby w tej funkcji... moze
-          //} else setError("Invalid username-password combination")
-          return <App />
+          setError(undefined)
+          loginAttempt(username, password)
+            .then((res) => {
+              if (res === undefined) {
+                throw Error("Authentication error")
+              }
+
+              window.localStorage.setItem("token", res.token)
+              return getCurrentUser()
+            })
+            .then((res) => {
+              if (res === undefined) {
+                throw Error("Weird error")
+              }
+              loginAsUser(res)
+            })
+            .catch((e) => {
+              setError("Cos sie stalo")
+            })
         }}
       >
         <label htmlFor="username" className="field">
