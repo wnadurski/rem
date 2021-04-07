@@ -1,8 +1,5 @@
 import React, { ReactElement, useState } from "react"
-//import { passwordIsCorrect } from "./passwordIsCorrect"
 import { getCurrentUser, loginAttempt } from "./services"
-//import { userIsFound } from "./userIsFound"
-import App from "../App"
 import { User } from "../User"
 
 type Props = {
@@ -36,8 +33,8 @@ const LoginForm = ({ loginAsUser }: Props): ReactElement => {
               }
               loginAsUser(res)
             })
-            .catch((e) => {
-              setError("Cos sie stalo")
+            .catch(() => {
+              setError("Cos poszlo nie tak")
             })
         }}
       >

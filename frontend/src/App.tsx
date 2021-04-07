@@ -1,8 +1,7 @@
-import React, { ReactElement, useState, useEffect } from "react"
+import React, { ReactElement, useState } from "react"
 import "./App.css"
 import LoginForm from "./auth/LoginForm"
-import HiUserToken from "./auth/HiUserToken"
-import { getCurrentUser } from "./auth/services"
+import AppContent from "./auth/AppContent"
 import { User } from "./User"
 
 function App(): ReactElement {
@@ -12,7 +11,11 @@ function App(): ReactElement {
     return (
       <div className="App">
         <header className="App-header">
-          <HiUserToken />
+          <AppContent
+            logOut={() => {
+              setUser(undefined)
+            }}
+          />
         </header>
       </div>
     )

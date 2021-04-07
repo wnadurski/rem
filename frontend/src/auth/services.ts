@@ -1,3 +1,4 @@
+import { promises } from "node:dns"
 import { User } from "../User"
 
 export async function getCurrentUser(): Promise<User | undefined> {
@@ -26,16 +27,18 @@ export async function loginAttempt(
     }
   | undefined
 > {
-  const requestOps = {
+  return Promise.resolve(undefined)
+  /*const requestOps = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
   }
+
   return fetch("/api/auth/login", requestOps).then((res) => {
     if (res.status !== 200) {
       return undefined
     }
 
     return res.json()
-  })
+  })*/
 }
