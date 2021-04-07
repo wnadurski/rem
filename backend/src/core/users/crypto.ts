@@ -8,6 +8,7 @@ import {
   parsePassword,
   Password,
 } from "./Password"
+import { getOrElse, some } from "fp-ts/Option"
 
 const hashPassword = (
   hashingAlgorithm: Values<typeof algorithms>,
@@ -23,7 +24,9 @@ export const passwordToStore = (password: string): Password => {
   const salt = crypto.randomBytes(32).toString("base64")
   const hashedPassword = hashPassword(hashingAlgorithm, salt, password)
 
-  return mkPassword(`${hashingAlgorithm}$${salt}$${hashedPassword}`)
+  return getOrElse(() => "" as any)(
+    mkPassword(`${hashingAlgorithm}$${salt}$${hashedPassword}`)
+  )
 }
 
 export const isPasswordMatch = (

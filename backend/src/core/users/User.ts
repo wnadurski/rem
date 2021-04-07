@@ -4,5 +4,5 @@ import { Password } from "./Password"
 export interface User {
   id: Id
   email: string
-  password?: Password
+  password?: Password | null
 }

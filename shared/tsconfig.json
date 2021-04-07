@@ -1,0 +1,27 @@
+{
+  "extends": "./configs/tsconfig.json",
+  "compilerOptions": {
+    "incremental": true,
+    "target": "es6",
+    "module": "esnext",
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "outDir": "./build",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react"
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/*.test-d.ts"
+  ]
+}
