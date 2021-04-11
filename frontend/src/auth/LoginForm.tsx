@@ -4,7 +4,7 @@ import { User } from "../User"
 import { setToken } from "./token"
 
 type Props = {
-  loginAsUser: (user: User) => void
+  loginAsUser: (login: string, password: string) => Promise<User | void>
 }
 
 const LoginForm = ({ loginAsUser }: Props): ReactElement => {
@@ -19,24 +19,11 @@ const LoginForm = ({ loginAsUser }: Props): ReactElement => {
         onSubmit={(e) => {
           e.preventDefault()
           setError(undefined)
-          loginAttempt(username, password)
-            .then((res) => {
-              if (res === undefined) {
-                throw Error("Authentication error")
-              }
-
-              setToken(res.token)
-              return getCurrentUser()
-            })
-            .then((res) => {
-              if (res === undefined) {
-                throw Error("Weird error")
-              }
-              loginAsUser(res)
-            })
-            .catch(() => {
+          loginAsUser(username, password).then((user) => {
+            if (!user) {
               setError("Cos poszlo nie tak")
-            })
+            }
+          })
         }}
       >
         <label htmlFor="username" className="field">
