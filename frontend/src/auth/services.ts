@@ -1,27 +1,32 @@
 import { User } from "../User"
+import { getToken } from "./token"
 
-export async function getCurrentUser(): Promise<User | undefined> {
-  const token = window.localStorage.getItem("token")
+// export async function getCurrentUser(): Promise<User | undefined> {
+//   const token = getToken()
+//
+//   const requestOps = {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${token || "invalid"}`,
+//     },
+//   }
+//   // eslint-disable-next-line no-undef
+//   return fetch("/api/auth/user", requestOps).then((res) => {
+//     // tutaj^
+//     if (res.status !== 200) {
+//       return undefined
+//     }
+//     return res.json()
+//   })
+// }
 
-  const requestOps = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token || "invalid"}`,
-    },
-  }
-  // eslint-disable-next-line no-undef
-  return fetch("/api/auth/getuser", requestOps).then((res) => {
-    // tutaj^
-    if (res.status !== 200) {
-      return undefined
-    }
-    return res.json()
-  })
+export function getCurrentUser(): Promise<User | undefined> {
+  return Promise.resolve({ email: "Witam serdecznie" })
 }
 
 export async function loginAttempt(
-  username: string,
+  login: string,
   password: string
 ): Promise<
   | {
@@ -32,7 +37,7 @@ export async function loginAttempt(
   const requestOps = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ login, password }),
   }
 
   return fetch("/api/auth/login", requestOps).then((res) => {
@@ -45,18 +50,16 @@ export async function loginAttempt(
 }
 
 export async function logOut(): Promise<{ token: string } | undefined> {
-  //tutaj ^
   const requestOps = {
-    method: "POST",
+    method: "DELETE",
     headers: { "Content-Type": "application/json" },
-    body: window.localStorage.getItem("Token"),
+    body: JSON.stringify({ token: getToken() }),
   }
-  return fetch("/api/auth/logout", requestOps).then((res) => {
-    //tutaj ^
-    if (res.status !== 200) {
-      return undefined
-    }
+  const res = await fetch("/api/auth/logout", requestOps)
 
-    return res.json()
-  })
+  if (res.status !== 200) {
+    return undefined
+  }
+
+  return res.json()
 }

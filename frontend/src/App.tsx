@@ -4,6 +4,7 @@ import LoginForm from "./auth/LoginForm"
 import AppContent from "./auth/AppContent"
 import { User } from "./User"
 import { logOut } from "./auth/services"
+import { removeToken } from "./auth/token"
 
 function App(): ReactElement {
   const [user, setUser] = useState<User | undefined>(undefined)
@@ -14,8 +15,9 @@ function App(): ReactElement {
         <header className="App-header">
           <AppContent
             onLogOut={() => {
-              setUser(undefined)
               logOut()
+              removeToken()
+              setUser(undefined)
             }}
           />
         </header>

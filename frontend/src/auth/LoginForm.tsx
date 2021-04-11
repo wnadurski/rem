@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from "react"
 import { getCurrentUser, loginAttempt } from "./services"
 import { User } from "../User"
+import { setToken } from "./token"
 
 type Props = {
   loginAsUser: (user: User) => void
@@ -24,7 +25,7 @@ const LoginForm = ({ loginAsUser }: Props): ReactElement => {
                 throw Error("Authentication error")
               }
 
-              window.localStorage.setItem("token", res.token)
+              setToken(res.token)
               return getCurrentUser()
             })
             .then((res) => {

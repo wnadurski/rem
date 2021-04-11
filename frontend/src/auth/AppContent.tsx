@@ -1,7 +1,9 @@
 import React, { ReactElement } from "react"
+
 type Props = {
   onLogOut: () => void
 }
+
 const AppContent = ({ onLogOut }: Props): ReactElement => {
   return (
     <div>
@@ -10,7 +12,6 @@ const AppContent = ({ onLogOut }: Props): ReactElement => {
         className="submit-button"
         onClick={(e) => {
           e.preventDefault()
-          window.localStorage.removeItem("token")
           onLogOut()
         }}
       >
