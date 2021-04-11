@@ -7,7 +7,8 @@
     "test": "jest",
     "start": "nodemon",
     "build": "tsc",
-    "lint": "tsc --noEmit && eslint src/**/*.ts"
+    "lint": "tsc --noEmit && eslint src/**/*.ts",
+    "migrate": "npx prisma migrate dev"
   },
   "author": "",
   "license": "ISC",

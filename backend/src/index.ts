@@ -1,8 +1,8 @@
 import express from "express"
 import { createApi } from "./api"
+import { config } from "./config"
 
 const app = express()
-const port = 3000
 
 app.get("/", (req: any, res: any) => {
   res.send("The sedulous hyena ate the antelope!")
@@ -14,9 +14,9 @@ createApi(apiRoute)
 
 app.use("/api", apiRoute)
 
-app.listen(port, ((err: any) => {
+app.listen(config.port, ((err: any) => {
   if (err) {
     return console.error(err)
   }
-  return console.log(`server is listening on ${port}`)
+  return console.log(`server is listening on ${config.port}`)
 }) as any)
