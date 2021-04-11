@@ -4,7 +4,7 @@ type Props = {
   onLogOut: () => void
 }
 
-const AppContent = ({ onLogOut }: Props): ReactElement => {
+const WelcomePage = ({ onLogOut }: Props): ReactElement => {
   return (
     <div>
       <h1>Hi, your token has been saved in local storage</h1>
@@ -20,4 +20,4 @@ const AppContent = ({ onLogOut }: Props): ReactElement => {
     </div>
   )
 }
-export default AppContent
+export default WelcomePage
