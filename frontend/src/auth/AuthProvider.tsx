@@ -1,7 +1,7 @@
-import { ReactElement, ReactFragment, useState } from "react"
+import { ReactElement, ReactFragment, useEffect, useState } from "react"
 import { User } from "../User"
 import { getCurrentUser, loginAttempt, logOut } from "./services"
-import { removeToken, setToken } from "./token"
+import { getToken, removeToken, setToken } from "./token"
 
 interface Props {
   // children: ReactElement
@@ -12,8 +12,22 @@ interface Props {
   }) => ReactElement
 }
 
-export const AuthProvider = ({ render }: Props): ReactElement => {
-  const [user, setUser] = useState<User | undefined>(undefined)
+const UnknownState = "UNKNOWN" as const
+
+export const AuthProvider = ({ render }: Props): ReactElement | null => {
+  const [user, setUser] = useState<User | undefined | typeof UnknownState>(
+    UnknownState
+  )
+
+  useEffect(() => {
+    const initialize = async () => {
+      if (getToken()) {
+        setUser(await getCurrentUser())
+      }
+    }
+
+    initialize()
+  }, [])
 
   const doLogOut = async () => {
     await logOut()
@@ -38,5 +52,9 @@ export const AuthProvider = ({ render }: Props): ReactElement => {
     return user
   }
 
-  return render({ user, logOut: doLogOut, logIn: doLogIn })
+  if (user === UnknownState) {
+    return null
+  } else {
+    return render({ user, logOut: doLogOut, logIn: doLogIn })
+  }
 }
