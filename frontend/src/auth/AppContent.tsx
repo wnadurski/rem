@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react"
 type Props = {
-  logOut: () => void
+  onLogOut: () => void
 }
-const AppContent = ({ logOut }: Props): ReactElement => {
+const AppContent = ({ onLogOut }: Props): ReactElement => {
   return (
     <div>
       <h1>Hi, your token has been saved in local storage</h1>
@@ -11,7 +11,7 @@ const AppContent = ({ logOut }: Props): ReactElement => {
         onClick={(e) => {
           e.preventDefault()
           window.localStorage.removeItem("token")
-          logOut()
+          onLogOut()
         }}
       >
         Log out

@@ -1,4 +1,3 @@
-import { promises } from "node:dns"
 import { User } from "../User"
 
 export async function getCurrentUser(): Promise<User | undefined> {
@@ -12,10 +11,13 @@ export async function getCurrentUser(): Promise<User | undefined> {
     },
   }
   // eslint-disable-next-line no-undef
-  return fetch(
-    process.env.PUBLIC_URL + "/usertoken.json",
-    requestOps
-  ).then((res) => res.json())
+  return fetch("/api/auth/getuser", requestOps).then((res) => {
+    // tutaj^
+    if (res.status !== 200) {
+      return undefined
+    }
+    return res.json()
+  })
 }
 
 export async function loginAttempt(
@@ -27,8 +29,7 @@ export async function loginAttempt(
     }
   | undefined
 > {
-  return Promise.resolve(undefined)
-  /*const requestOps = {
+  const requestOps = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
@@ -40,5 +41,22 @@ export async function loginAttempt(
     }
 
     return res.json()
-  })*/
+  })
+}
+
+export async function logOut(): Promise<{ token: string } | undefined> {
+  //tutaj ^
+  const requestOps = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: window.localStorage.getItem("Token"),
+  }
+  return fetch("/api/auth/logout", requestOps).then((res) => {
+    //tutaj ^
+    if (res.status !== 200) {
+      return undefined
+    }
+
+    return res.json()
+  })
 }

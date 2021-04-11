@@ -3,6 +3,7 @@ import "./App.css"
 import LoginForm from "./auth/LoginForm"
 import AppContent from "./auth/AppContent"
 import { User } from "./User"
+import { logOut } from "./auth/services"
 
 function App(): ReactElement {
   const [user, setUser] = useState<User | undefined>(undefined)
@@ -12,8 +13,9 @@ function App(): ReactElement {
       <div className="App">
         <header className="App-header">
           <AppContent
-            logOut={() => {
+            onLogOut={() => {
               setUser(undefined)
+              logOut()
             }}
           />
         </header>
