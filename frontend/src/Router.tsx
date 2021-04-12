@@ -1,18 +1,12 @@
 import WelcomePage from "./pages/WelcomePage"
 import LoginForm from "./auth/LoginForm"
-import React, { ReactElement } from "react"
+import React, { ReactElement, useContext } from "react"
 import { User } from "./User"
+import { AuthContext } from "./auth/AuthProvider"
 
-interface Props {
-  user: User | undefined
-  logIn: (login: string, password: string) => Promise<User | undefined>
-  logOut: () => Promise<void>
-}
+interface Props {}
 
-export const Router = ({ user, logOut, logIn }: Props): ReactElement => {
-  return user ? (
-    <WelcomePage onLogOut={logOut} />
-  ) : (
-    <LoginForm loginAsUser={logIn} />
-  )
+export const Router = (): ReactElement => {
+  const { user } = useContext(AuthContext)
+  return user ? <WelcomePage /> : <LoginForm />
 }

@@ -6,15 +6,11 @@ import { Router } from "./Router"
 
 function App(): ReactElement {
   return (
-    <AuthProvider
-      render={({ user, logIn, logOut }) => {
-        return (
-          <PageContainer>
-            <Router user={user} logOut={logOut} logIn={logIn} />
-          </PageContainer>
-        )
-      }}
-    />
+    <AuthProvider>
+      <PageContainer>
+        <Router />
+      </PageContainer>
+    </AuthProvider>
   )
 }
 

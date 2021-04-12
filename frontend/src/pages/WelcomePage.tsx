@@ -1,10 +1,11 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useContext } from "react"
+import { AuthContext } from "../auth/AuthProvider"
 
-type Props = {
-  onLogOut: () => void
-}
+// eslint-disable-next-line @typescript-eslint/ban-types
+type Props = {}
 
-const WelcomePage = ({ onLogOut }: Props): ReactElement => {
+const WelcomePage = (): ReactElement => {
+  const { logout } = useContext(AuthContext)
   return (
     <div>
       <h1>Hi, your token has been saved in local storage</h1>
@@ -12,7 +13,7 @@ const WelcomePage = ({ onLogOut }: Props): ReactElement => {
         className="submit-button"
         onClick={(e) => {
           e.preventDefault()
-          onLogOut()
+          logout()
         }}
       >
         Log out

@@ -1,16 +1,17 @@
-import React, { ReactElement, useState } from "react"
+import React, { ReactElement, useContext, useState } from "react"
 import { getCurrentUser, loginAttempt } from "./services"
 import { User } from "../User"
 import { setToken } from "./token"
+import { AuthContext } from "./AuthProvider"
 
-type Props = {
-  loginAsUser: (login: string, password: string) => Promise<User | void>
-}
+// eslint-disable-next-line @typescript-eslint/ban-types
+type Props = {}
 
-const LoginForm = ({ loginAsUser }: Props): ReactElement => {
+const LoginForm = (): ReactElement => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<undefined | string>(undefined)
+  const { login } = useContext(AuthContext)
 
   return (
     <div>
@@ -19,7 +20,7 @@ const LoginForm = ({ loginAsUser }: Props): ReactElement => {
         onSubmit={(e) => {
           e.preventDefault()
           setError(undefined)
-          loginAsUser(username, password).then((user) => {
+          login(username, password).then((user) => {
             if (!user) {
               setError("Cos poszlo nie tak")
             }
