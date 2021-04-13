@@ -1,11 +1,5 @@
 import React, { ReactElement, useContext, useState } from "react"
-import { getCurrentUser, loginAttempt } from "./services"
-import { User } from "../User"
-import { setToken } from "./token"
 import { AuthContext } from "./AuthProvider"
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-type Props = {}
 
 const LoginForm = (): ReactElement => {
   const [username, setUsername] = useState("")

@@ -1,10 +1,4 @@
-import {
-  ReactElement,
-  ReactFragment,
-  useEffect,
-  useState,
-  createContext,
-} from "react"
+import { ReactElement, useEffect, useState, createContext } from "react"
 import { User } from "../User"
 import { getCurrentUser, loginAttempt, logOut } from "./services"
 import { getToken, removeToken, setToken } from "./token"
