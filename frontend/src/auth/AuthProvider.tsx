@@ -51,8 +51,6 @@ export const AuthProvider = ({ children }: Props): ReactElement | null => {
     login: string,
     password: string
   ): Promise<User | undefined> => {
-    // eslint-disable-next-line no-console
-    console.log("jednak tutaj")
     const data = await loginAttempt(login, password)
 
     if (!data) {
@@ -67,12 +65,8 @@ export const AuthProvider = ({ children }: Props): ReactElement | null => {
   }
 
   if (user === UnknownState) {
-    // eslint-disable-next-line no-console
-    console.log("tam")
     return null
   } else {
-    // eslint-disable-next-line no-console
-    console.log("tutaj")
     return (
       <AuthContext.Provider
         value={{
