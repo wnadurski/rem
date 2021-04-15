@@ -1,14 +1,16 @@
 import React, { ReactElement } from "react"
 import "./App.css"
-import LoginForm from "./LoginForm"
+import { PageContainer } from "./layout/PageContainer"
+import { AuthProvider } from "./auth/AuthProvider"
+import { Router } from "./Router"
 
 function App(): ReactElement {
   return (
-    <div className="App">
-      <header className="App-header">
-        <LoginForm />
-      </header>
-    </div>
+    <AuthProvider>
+      <PageContainer>
+        <Router />
+      </PageContainer>
+    </AuthProvider>
   )
 }
 

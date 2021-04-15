@@ -1,8 +1,11 @@
-import React, { ReactElement, useState } from "react"
+import React, { ReactElement, useContext, useState } from "react"
+import { AuthContext } from "./AuthProvider"
 
-const MyForm = (): ReactElement => {
+const LoginForm = (): ReactElement => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState<undefined | string>(undefined)
+  const { login } = useContext(AuthContext)
 
   return (
     <div>
@@ -10,6 +13,12 @@ const MyForm = (): ReactElement => {
         className="flex-column"
         onSubmit={(e) => {
           e.preventDefault()
+          setError(undefined)
+          login(username, password).then((user) => {
+            if (!user) {
+              setError("Cos poszlo nie tak")
+            }
+          })
         }}
       >
         <label htmlFor="username" className="field">
@@ -41,7 +50,8 @@ const MyForm = (): ReactElement => {
           Log in
         </button>
       </form>
+      {error}
     </div>
   )
 }
-export default MyForm
+export default LoginForm

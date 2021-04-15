@@ -1,8 +1,8 @@
-import React from "react"
 import { render, screen } from "@testing-library/react"
-import LoginForm from "../LoginForm"
+import React from "react"
+import LoginForm from "../auth/LoginForm"
 
-test("renders 4 elements specified in MyForm", () => {
+test("renders 4 elements specified in LoginForm", () => {
   render(<LoginForm />)
 
   const usernameField = screen.getByPlaceholderText("Username")
