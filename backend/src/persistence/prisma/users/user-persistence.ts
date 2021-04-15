@@ -39,6 +39,14 @@ export const userPersistence: UserPersistence = {
     )
   },
 
+  async getById(id) {
+    return pipe(
+      await prisma.user.findFirst({ where: { id: showId.show(id) } }),
+      fromNullable,
+      chain(userFromDb)
+    )
+  },
+
   async saveUser(user) {
     await prisma.user.create({
       data: {
