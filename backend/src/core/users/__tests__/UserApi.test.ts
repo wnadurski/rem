@@ -19,6 +19,7 @@ const email = "someemail@test.pl"
 const mockedUserPersistence: MockFunctions<UserPersistence> = {
   saveUser: jest.fn(),
   getByEmail: jest.fn(),
+  getById: jest.fn(),
 }
 const userApi = createUserApi(mockedUserPersistence)
 
