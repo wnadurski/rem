@@ -34,6 +34,6 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm ci && npm run ci:frontend && npm run ci:backend && npm run ci:shared
-      - run: npm run lint
       - run: npm run build
+      - run: npm run lint
       - run: npm test
