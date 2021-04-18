@@ -8,16 +8,24 @@ import jwt from "jsonwebtoken"
 import { config } from "../../config"
 import { log } from "../../log"
 import { omit } from "ramda"
+import { optionPromise } from "../../utils/promise"
+import { Task } from "fp-ts/Task"
 
 export interface UserApi {
   createUser: (email: string, password?: string) => Promise<User>
   authenticateUser: (email: string, password: string) => Promise<Option<string>>
   getUserForToken: (token: string) => Promise<Option<User>>
+  logoutUser: (token: string) => Task<void>
 }
 
 export const createUserApi = (persistence: UserPersistence): UserApi => {
   return {
+    logoutUser: (token) => pipe(token, persistence.deleteToken),
     async getUserForToken(token: string) {
+      if (!(await persistence.isTokenWhitelisted(token)())) {
+        return none
+      }
+
       try {
         const payload: any = jwt.verify(token, config.authSecret)
 
@@ -39,7 +47,13 @@ export const createUserApi = (persistence: UserPersistence): UserApi => {
           return isMatch
         }),
         map((user) => omit(["password"], user) as TokenPayload),
-        map((payload) => jwt.sign(payload, config.authSecret))
+        map((payload) => jwt.sign(payload, config.authSecret)),
+        map((token) =>
+          persistence
+            .saveToken(token)()
+            .then(() => token)
+        ),
+        optionPromise
       )
     },
 

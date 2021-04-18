@@ -20,6 +20,7 @@ import { pipe } from "fp-ts/function"
 import { User } from "../../../core/users/User"
 import { User as DbUser } from "@prisma/client"
 import { sequenceT } from "fp-ts/Apply"
+import { Task } from "fp-ts/Task"
 
 const userFromDb: (user: DbUser) => Option<User> = (user) =>
   pipe(
@@ -31,6 +32,20 @@ const userFromDb: (user: DbUser) => Option<User> = (user) =>
   )
 
 export const userPersistence: UserPersistence = {
+  isTokenWhitelisted: (token) => async () =>
+    !!prisma.whitelistedTokens.findFirst({ where: { token } }),
+  deleteToken(token: string): Task<void> {
+    return async () => {
+      await prisma.whitelistedTokens.delete({ where: { token } })
+    }
+  },
+  saveToken(token: string): Task<void> {
+    return async () => {
+      await prisma.whitelistedTokens.create({
+        data: { token },
+      })
+    }
+  },
   async getByEmail(email) {
     return pipe(
       await prisma.user.findFirst({ where: { email } }),
