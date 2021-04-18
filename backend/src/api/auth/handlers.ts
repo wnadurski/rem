@@ -7,7 +7,7 @@ import {
 } from "../../../../shared/src/api-schema/auth-schema"
 import { UserApi } from "../../core/users/UserApi"
 import { Request } from "express"
-import { getUser } from "./middleware/user"
+import { getToken, getUser } from "./middleware/user"
 import { showId } from "../../core/id/Id"
 
 export const authHandlers: (
@@ -35,8 +35,14 @@ export const authHandlers: (
   signOut: {
     path: "/auth/logout",
     method: "DELETE",
-    handler: async () => {
-      return { code: 200, data: undefined }
+    handler: async (_, request) => {
+      const token = getToken(request)
+      const success = { code: 200, data: undefined } as const
+      if (!token) {
+        return success
+      }
+      await userApi.logoutUser(token)()
+      return success
     },
   },
   getCurrentUser: {
