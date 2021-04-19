@@ -20,7 +20,7 @@ export interface UserApi {
 
 export const createUserApi = (persistence: UserPersistence): UserApi => {
   return {
-    logoutUser: (token) => pipe(token, persistence.deleteToken),
+    logoutUser: persistence.deleteToken,
     async getUserForToken(token: string) {
       if (!(await persistence.isTokenWhitelisted(token)())) {
         return none

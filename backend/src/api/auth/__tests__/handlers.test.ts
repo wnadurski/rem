@@ -3,6 +3,7 @@ import { UserApi } from "../../../core/users/UserApi"
 import { none, some } from "fp-ts/Option"
 
 const mockedUserApi: jest.Mocked<UserApi> = {
+  logoutUser: jest.fn(),
   authenticateUser: jest.fn(),
   createUser: jest.fn(),
   getUserForToken: jest.fn(),

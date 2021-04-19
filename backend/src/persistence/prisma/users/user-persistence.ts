@@ -33,7 +33,7 @@ const userFromDb: (user: DbUser) => Option<User> = (user) =>
 
 export const userPersistence: UserPersistence = {
   isTokenWhitelisted: (token) => async () =>
-    !!prisma.whitelistedTokens.findFirst({ where: { token } }),
+    !!(await prisma.whitelistedTokens.findFirst({ where: { token } })),
   deleteToken(token: string): Task<void> {
     return async () => {
       await prisma.whitelistedTokens.delete({ where: { token } })

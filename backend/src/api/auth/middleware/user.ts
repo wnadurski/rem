@@ -26,7 +26,7 @@ const setToken = (req: Request, token: string | undefined) => {
 export const getToken = (req: Request): string | undefined => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return req.user
+  return req.token
 }
 
 export const userMiddleware = (
