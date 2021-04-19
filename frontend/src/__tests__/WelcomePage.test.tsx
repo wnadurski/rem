@@ -6,7 +6,7 @@ import WelcomePage from "../pages/WelcomePage"
 test("renders Hi and a log out button", () => {
   render(
     <WelcomePage>
-      <Link to="/estates">View estates</Link>
+      <div></div>
     </WelcomePage>
   )
 
