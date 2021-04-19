@@ -25,7 +25,7 @@ export function getCurrentUser(): Promise<User | undefined> {
   return Promise.resolve({ email: "Witam serdecznie" })
 }
 
-export async function loginAttempt(
+export async function attemptLogin(
   login: string,
   password: string
 ): Promise<
