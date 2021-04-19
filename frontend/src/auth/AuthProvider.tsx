@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState, createContext } from "react"
 import { User } from "../User"
-import { getCurrentUser, loginAttempt, logOut } from "./services"
+import { getCurrentUser, attemptLogin, logOut } from "./services"
 import { getToken, removeToken, setToken } from "./token"
 
 interface Props {
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: Props): ReactElement | null => {
     login: string,
     password: string
   ): Promise<User | undefined> => {
-    const data = await loginAttempt(login, password)
+    const data = await attemptLogin(login, password)
 
     if (!data) {
       return undefined
