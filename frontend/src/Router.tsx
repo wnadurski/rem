@@ -1,10 +1,17 @@
 import React, { ReactElement, useContext } from "react"
-import { HashRouter, Link, Switch, Route } from "react-router-dom"
+import {
+  HashRouter,
+  Link,
+  Switch,
+  Route,
+  useRouteMatch,
+} from "react-router-dom"
 import { AuthContext } from "./auth/AuthProvider"
 import LoginForm from "./auth/LoginForm"
 import WelcomePage from "./pages/WelcomePage"
 import ListedEstates from "./estates/ListedEstates"
 import EstateAdder from "./estates/EstateAdder"
+import StarterEstate from "./estates/StarterEstate"
 
 export const Router = (): ReactElement => {
   const { user } = useContext(AuthContext)
@@ -12,29 +19,27 @@ export const Router = (): ReactElement => {
   return (
     <HashRouter>
       <Switch>
+        <Route path="/estates/StarterEstate">
+          <StarterEstate>
+            <Link to="/">Home</Link>
+          </StarterEstate>
+        </Route>
         <Route path="/estates/add">
           <EstateAdder>
             <Link to="/">Home</Link>
           </EstateAdder>
         </Route>
         <Route path="/estates">
-          <ListedEstates>
-            <div>
-              <Link to="/estates/add">Add estates</Link>
-              <Link to="/">Home</Link>
-            </div>
-          </ListedEstates>
+          <ListedEstates />
         </Route>
         <Route path="/">
-          <div>
-            {user ? (
-              <WelcomePage>
-                <Link to="/estates">View estates</Link>
-              </WelcomePage>
-            ) : (
-              <LoginForm />
-            )}
-          </div>
+          {user ? (
+            <WelcomePage>
+              <Link to="/estates">View estates</Link>
+            </WelcomePage>
+          ) : (
+            <LoginForm />
+          )}
         </Route>
       </Switch>
     </HashRouter>

@@ -12,6 +12,7 @@ test("renders Hi and a log out button", () => {
 
   const textHi = screen.getByText("Hi, stranger")
   const outButton = screen.getByText("Log out")
+
   expect(textHi).toBeInTheDocument()
   expect(outButton).toBeInTheDocument()
 })
