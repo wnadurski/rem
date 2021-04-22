@@ -19,15 +19,15 @@ export const Router = (): ReactElement => {
   return (
     <HashRouter>
       <Switch>
-        <Route path="/estates/StarterEstate">
-          <StarterEstate>
-            <Link to="/">Home</Link>
-          </StarterEstate>
-        </Route>
         <Route path="/estates/add">
           <EstateAdder>
             <Link to="/">Home</Link>
           </EstateAdder>
+        </Route>
+        <Route path="/estates/:id">
+          <StarterEstate>
+            <Link to="/">Home</Link>
+          </StarterEstate>
         </Route>
         <Route path="/estates">
           <ListedEstates />

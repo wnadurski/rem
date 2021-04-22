@@ -1,9 +1,11 @@
 import React, { ReactElement } from "react"
+import { useParams } from "react-router-dom"
 
 interface Props {
   children: ReactElement
 }
 const StarterEstate = ({ children }: Props): ReactElement => {
+  const { id } = useParams<{ id?: string }>()
   return (
     <div>
       <h1>Estate template</h1>
@@ -11,7 +13,7 @@ const StarterEstate = ({ children }: Props): ReactElement => {
       <p>Cost: </p>
       <p>Tenant: </p>
       <img src="https://via.placeholder.com/150" />
-      <p>Comments: </p>
+      <p>Comments: {id}</p>
       {children}
     </div>
   )
