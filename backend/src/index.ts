@@ -1,6 +1,7 @@
 import express from "express"
 import { createApi } from "./api"
 import { config } from "./config"
+import { userMiddleware } from "./api/auth/middleware/user"
 
 const app = express()
 
@@ -12,6 +13,7 @@ const apiRoute = express.Router().use(express.json())
 
 createApi(apiRoute)
 
+app.use("/api", userMiddleware)
 app.use("/api", apiRoute)
 
 app.listen(config.port, ((err: any) => {

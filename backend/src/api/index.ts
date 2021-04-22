@@ -10,7 +10,7 @@ export const createApi = (app: Router): Router => {
       app[toLowerCase(endpoint.method)](
         endpoint.path,
         async (request, response) => {
-          const result = await endpoint.handler(request.body, request)
+          const result = await (endpoint.handler as any)(request.body, request)
 
           response.status(result.code)
           response.json(result.data)

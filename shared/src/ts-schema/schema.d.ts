@@ -3,7 +3,7 @@ export interface Response {
   403?: any
 }
 
-export type Method = "POST" | "GET"
+export type Method = "POST" | "GET" | "DELETE"
 
 export interface Endpoint<
   Path extends string,
