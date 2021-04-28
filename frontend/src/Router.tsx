@@ -1,11 +1,5 @@
 import React, { ReactElement, useContext } from "react"
-import {
-  HashRouter,
-  Link,
-  Switch,
-  Route,
-  useRouteMatch,
-} from "react-router-dom"
+import { HashRouter, Link, Switch, Route } from "react-router-dom"
 import { AuthContext } from "./auth/AuthProvider"
 import LoginForm from "./auth/LoginForm"
 import WelcomePage from "./pages/WelcomePage"

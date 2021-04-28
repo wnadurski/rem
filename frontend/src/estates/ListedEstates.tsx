@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react"
 import { Link } from "react-router-dom"
 import { Card } from "antd"
-import EstateAdder from "./EstateAdder"
 
 interface Estate {
   id: string

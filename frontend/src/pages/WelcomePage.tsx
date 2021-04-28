@@ -1,5 +1,4 @@
 import React, { ReactElement, useContext } from "react"
-import { Link } from "react-router-dom"
 import { AuthContext } from "../auth/AuthProvider"
 
 interface Props {

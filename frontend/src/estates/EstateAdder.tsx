@@ -1,5 +1,4 @@
 import React, { ReactElement, useState } from "react"
-import { createEmptyStatement } from "typescript"
 
 interface Props {
   children: ReactElement
