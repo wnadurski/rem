@@ -1,11 +1,15 @@
 import React, { ReactElement, useContext } from "react"
 import { AuthContext } from "../auth/AuthProvider"
 
-const WelcomePage = (): ReactElement => {
-  const { logout } = useContext(AuthContext)
+interface Props {
+  children: ReactElement
+}
+
+const WelcomePage = ({ children }: Props): ReactElement => {
+  const { logout, user } = useContext(AuthContext)
   return (
     <div>
-      <h1>Hi, your token has been saved in local storage</h1>
+      <h1>Hi, {user ? user.email : "stranger"}</h1>
       <button
         className="submit-button"
         onClick={(e) => {
@@ -15,6 +19,7 @@ const WelcomePage = (): ReactElement => {
       >
         Log out
       </button>
+      {children}
     </div>
   )
 }

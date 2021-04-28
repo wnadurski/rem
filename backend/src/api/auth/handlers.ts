@@ -37,7 +37,7 @@ export const authHandlers: (
     method: "DELETE",
     handler: async (_, request) => {
       const token = getToken(request)
-      const success = { code: 200, data: undefined } as const
+      const success = { code: 200, data: null } as const
       if (!token) {
         return success
       }

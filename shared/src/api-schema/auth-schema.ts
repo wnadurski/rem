@@ -25,7 +25,7 @@ export type AuthSchema = Schema<{
     "DELETE",
     undefined,
     {
-      200: undefined
+      200: null
     }
   >
   getCurrentUser: Endpoint<
