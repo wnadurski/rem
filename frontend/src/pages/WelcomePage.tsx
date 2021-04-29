@@ -11,7 +11,7 @@ const WelcomePage = ({ children }: Props): ReactElement => {
     <div>
       <h1>Hi, {user ? user.email : "stranger"}</h1>
       <button
-        className="submit-button"
+        className="logout-button"
         onClick={(e) => {
           e.preventDefault()
           logout()
