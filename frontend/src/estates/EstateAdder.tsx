@@ -26,7 +26,7 @@ const EstateAdder = ({ children }: Props): ReactElement => {
             onBlur={(e) => setEstate(e.target.value)}
           />
         </label>
-        <button type="submit" className="submit-button">
+        <button type="submit" className="add-estate-button">
           Add an estate
         </button>
       </form>

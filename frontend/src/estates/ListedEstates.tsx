@@ -1,50 +1,41 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Card } from "antd"
-
-interface Estate {
-  id: string
-  name: string
-  address: string
-  cost: string
-  tenant: string
-}
+import { Estate, getEstates } from "./services"
 
 const ListedEstates = (): ReactElement => {
-  const estatesList: Estate[] = [
-    {
-      id: "1",
-      name: "garaz",
-      address: "Sloneczna 11",
-      cost: "1000",
-      tenant: "nikt",
-    },
-    {
-      id: "2",
-      name: "kwiaciarnia",
-      address: "Ksiezycowa 2",
-      cost: "500",
-      tenant: "ktos",
-    },
-  ]
-
+  const [estates, setEstates] = useState<undefined | Estate[]>(undefined)
+  useEffect(() => {
+    getEstates().then(setEstates)
+  }, [])
   return (
     <div>
       <div>Your estates:</div>
 
-      {estatesList.map((estate) => {
-        return (
-          <Card
-            title={estate.name}
-            extra={<Link to={`/estates/${estate.id}`}>Details</Link>}
-          >
-            <p>Address: {estate.address}</p>
-            <p>Cost: {estate.cost}</p>
-            <p>Tenant: {estate.tenant}</p>
-          </Card>
-        )
-      })}
-      <Link to="/estates/add">Add estates</Link>
+      {estates
+        ? estates.map((estate) => {
+            return (
+              <Card
+                title={estate.name}
+                extra={<Link to={`/estates/${estate.id}`}>Details</Link>}
+              >
+                <div className="flex-row">
+                  <img
+                    src="https://via.placeholder.com/150"
+                    className="miniature"
+                  />
+                  <div>
+                    <p>Address: {estate.address}</p>
+                    <p>Cost: {estate.cost}</p>
+                    <p>Tenant: {estate.tenant}</p>
+                    <p>Rented until: {estate.until}</p>
+                  </div>
+                </div>
+              </Card>
+            )
+          })
+        : undefined}
+      <Link to="/estates/add">Add estates </Link>
       <Link to="/">Home</Link>
     </div>
   )
