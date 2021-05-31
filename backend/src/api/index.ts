@@ -9,7 +9,7 @@ export const createApi = (app: Router): Router => {
     Object.values(list).map((endpoint) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      const f = app[toLowerCase(endpoint.method)]
+      const f = app[toLowerCase(endpoint.method)].bind(app)
       f(endpoint.path, async (request: any, response: any) => {
         const result = await (endpoint.handler as any)(request.body, request)
 
