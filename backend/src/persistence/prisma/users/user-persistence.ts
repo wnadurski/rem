@@ -3,19 +3,10 @@ import { prisma } from "../client"
 import { Id, parseId, showId } from "../../../core/id/Id"
 import {
   mkPassword,
-  parsePassword,
   Password,
   showPassword,
 } from "../../../core/users/Password"
-import {
-  chain,
-  fromNullable,
-  map,
-  option,
-  Option,
-  sequence,
-  some,
-} from "fp-ts/Option"
+import { chain, fromNullable, map, option, Option, some } from "fp-ts/Option"
 import { pipe } from "fp-ts/function"
 import { User } from "../../../core/users/User"
 import { User as DbUser } from "@prisma/client"

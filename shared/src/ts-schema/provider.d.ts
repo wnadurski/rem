@@ -23,3 +23,8 @@ export type SchemaToProviders<
     ? EndpointToProvider<SV[K]>
     : never
 }
+
+export type HandlerFor<
+  P extends SchemaToProviders<any>,
+  Key extends keyof P
+> = P[Key]["handler"]
