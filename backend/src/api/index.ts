@@ -7,16 +7,16 @@ const toLowerCase = <Str extends string>(str: Str): Lowercase<Str> =>
 export const createApi = (app: Router): Router => {
   Object.values(endpoints).map((list) =>
     Object.values(list).map((endpoint) => {
-      app[toLowerCase(endpoint.method)](
-        endpoint.path,
-        async (request, response) => {
-          const result = await (endpoint.handler as any)(request.body, request)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const f = app[toLowerCase(endpoint.method)].bind(app)
+      f(endpoint.path, async (request: any, response: any) => {
+        const result = await (endpoint.handler as any)(request.body, request)
 
-          response.status(result.code)
-          response.json(result.data)
-          response.end()
-        }
-      )
+        response.status(result.code)
+        response.json(result.data)
+        response.end()
+      })
     })
   )
   return app

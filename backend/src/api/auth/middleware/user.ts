@@ -5,7 +5,7 @@ import { andThen } from "ramda"
 import { toUndefined } from "fp-ts/Option"
 import { User } from "../../../core/users/User"
 
-const setUser = (req: Request, user: User | undefined) => {
+export const setUser = (req: Request, user: User | undefined): void => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   req.user = user
@@ -17,7 +17,7 @@ export const getUser = (req: Request): User | undefined => {
   return req.user
 }
 
-const setToken = (req: Request, token: string | undefined) => {
+export const setToken = (req: Request, token: string | undefined): void => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   req.token = token

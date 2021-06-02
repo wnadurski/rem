@@ -11,8 +11,70 @@ model User {
   id       String  @id
   email    String  @unique
   password String?
+
+  estates Estate[]
 }
 
 model WhitelistedTokens {
   token String @id
+}
+
+model Tenant {
+  id       String   @id
+  fullName String
+  rented   Estate[]
+}
+
+model Estate {
+  id       String     @id
+  owner    User       @relation(fields: [ownerId], references: [id])
+  name     String
+  address  Address?
+  tenants  Tenant[]
+  image    Image?     @relation(fields: [imageId], references: [id])
+  expenses Position[] @relation("expenses")
+  incomes  Position[] @relation("incomes")
+
+  ownerId String
+  imageId Int?
+}
+
+model Address {
+  id      String @id
+  country String
+  zipCode String
+  address String
+  estate  Estate @relation(fields: [estateId], references: [id])
+
+  estateId String
+}
+
+model Position {
+  id            String  @id
+  name          String
+  priceCurrency String
+  priceValue    Decimal
+  monthsPerYear Int
+  expenseFor    Estate? @relation("expenses", fields: [expenseForId], references: [id])
+  incomeFor     Estate? @relation("incomes", fields: [incomeForId], references: [id])
+
+  expenseForId String?
+  incomeForId  String?
+}
+
+model Image {
+    id   Int  @id @default(autoincrement())
+    src  String
+    resolutions Resolution[]
+
+    estate Estate?
+}
+
+model Resolution {
+    id         Int  @id @default(autoincrement())
+    src        String
+    resolution String
+
+    image   Image @relation(fields: [imageId], references: [id])
+    imageId Int
 }
